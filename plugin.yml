@@ -1,0 +1,7 @@
+name: ConquestiaCrafting
+version: 0.01
+
+authors: [Spearhartt]
+
+main: com.spearhartt.conquestiacrafting.ConquestiaCrafting
+load: startup
