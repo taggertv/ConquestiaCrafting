@@ -33,7 +33,7 @@ public class ConquestiaCrafting extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
 //        new CqCommandHandler(this);
         reloadConfig();
-        Config PlayerConfig = new Config(this, "players");
+        Config PlayerConfig = new Config(this, "Players" + File.separator);
     }
     
     public void onDisable()
@@ -41,14 +41,12 @@ public class ConquestiaCrafting extends JavaPlugin implements Listener {
     }
     
     @EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=false)
-    public void onJoin(PlayerJoinEvent event)
+    public void onJoin(PlayerJoinEvent event) throws InterruptedException
     {
         player = event.getPlayer();
-        Config markConfig = new Config(this.plugin, "Marks" + File.separator + player.getName());
-        markConfig.getConfig().set("x", player.getLocation().getX());
-        markConfig.getConfig().set("y", player.getLocation().getY());
-        markConfig.getConfig().set("z", player.getLocation().getZ());
-        markConfig.getConfig().set("world", player.getWorld().toString());
+        Config PlayerConfig = new Config(this, "Players" + File.separator + player.getName());
+        PlayerConfig.getConfig().set("Test", "Taggert likes pie");
+        PlayerConfig.saveConfig();
 //        craftConfig.getConfig().set("Platecraft", 1);
 //        craftConfig.getConfig().set("Magecraft", 1);
 //        craftConfig.getConfig().set("Stovecraft", 1);
@@ -56,7 +54,6 @@ public class ConquestiaCrafting extends JavaPlugin implements Listener {
 //        craftConfig.getConfig().set("Gemcraft", 1);
 //        craftConfig.getConfig().set("Leathercraft", 1);
 //        craftConfig.getConfig().set("Weaponcraft", 1);
-        markConfig.saveConfig();
         ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
         console.sendMessage(ChatColor.BLUE + "[" + ChatColor.GOLD + "ConquestiaCrafting" + ChatColor.BLUE + "]" + ChatColor.RESET + "created config for " + ChatColor.AQUA + event.getPlayer().getName());
         
